@@ -123,7 +123,7 @@ module Commander
         @program[key]
       end
       if [:version, :name, :description].include?(key)
-        return @program[key].join 
+        return [@program[key]].join 
       else
         return @program[key]
       end
