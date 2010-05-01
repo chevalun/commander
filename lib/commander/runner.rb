@@ -113,7 +113,7 @@ module Commander
     def program key, *args, &block
       if key == :help and !args.empty?
         @program[:help] ||= {}
-        @program[:help][args.first] = args.at(1)
+        return @program[:help][args.first] = args.at(1)
       elsif key == :help_formatter && !args.empty?
         @program[key] = (@help_formatter_aliases[args.first] || args.first)
       elsif block
@@ -121,6 +121,11 @@ module Commander
       else
         @program[key] = *args unless args.empty?
         @program[key]
+      end
+      if [:version, :name, :description].include?(key)
+        return @program[key].join 
+      else
+        return @program[key]
       end
     end
     
